@@ -12,18 +12,20 @@ public class App
     {
         Scanner scanner = new Scanner(System.in);
 
-        // Step 1: Get the list of integers from the user
-        System.out.println("Enter a list of integers (space-separated):");
-        String input = scanner.nextLine();
-        String[] inputArray = input.split(" ");
-        int[] array = new int[inputArray.length];
+        // Step 1: Get the number of integers
+        System.out.println("Enter the number of integers you want to sort:");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
 
-        for (int i = 0; i < inputArray.length; i++) {
-            array[i] = Integer.parseInt(inputArray[i]);
+        // Step 2: Input each integer
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter integer " + (i + 1) + ":");
+            array[i] = scanner.nextInt();
         }
 
-        // Step 2: Prompt user to select a sorting algorithm
+        // Step 3: Choose a sorting algorithm
         System.out.println("Choose a sorting algorithm:\n1. Bubble Sort\n2. Selection Sort");
+        System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
 
         if (choice == 1) {
@@ -36,23 +38,27 @@ public class App
         }
 
         // Display the sorted list
-        System.out.println("Sorted list:");
-        for (int num : array) {
-            System.out.print(num + " ");
+        System.out.print("Sorted List: ");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
         }
         System.out.println();
 
-        // Step 3: Search for a target integer
-        System.out.println("Enter an integer to search for:");
+        // Step 4: Search for a number in the sorted list
+        System.out.println("Enter the number to search for in the sorted list:");
         int target = scanner.nextInt();
-        boolean found = BinarySearch.search(array, target);
+        int position = BinarySearch.search(array, target);
 
-        if (found) {
-            System.out.println("The integer " + target + " was found in the list.");
+        if (position != -1) {
+            System.out.println("Number found at position " + (position + 1) + ".");
         } else {
-            System.out.println("The integer " + target + " was not found in the list.");
+            System.out.println("Number not found.");
         }
 
+        System.out.println("Thank you for using the application.");
         scanner.close();
     }
 }
